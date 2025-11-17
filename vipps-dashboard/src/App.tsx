@@ -103,24 +103,24 @@ function App() {
 
       {error && <div className="error">Feil: {error}</div>}
 
-      {data && (
+      {data?.player && (
         <main className="grid">
           {/* Venstre kolonne – profil og saldo */}
           <section className="card">
             <h2>Din saldo og profil</h2>
             <div className="profile">
               <div className="avatar">
-                {data.player.name.slice(0, 2).toUpperCase()}
+                {data?.player.name.slice(0, 2).toUpperCase()}
               </div>
               <div>
-                <div className="name">{data.player.name}</div>
-                <div className="sub">Vipps {data.player.vipps}</div>
+                <div className="name">{data?.player.name}</div>
+                <div className="sub">Vipps {data?.player.vipps}</div>
               </div>
             </div>
 
             <div className="saldo-box">
               <div className="label">
-                {data.player.saldo < 0 ? "Skylder" : "Har til gode"}
+                {data?.player.saldo < 0 ? "Skylder" : "Har til gode"}
               </div>
               <div className="saldo">{saldoText} kr</div>
             </div>
