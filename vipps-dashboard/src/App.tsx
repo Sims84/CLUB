@@ -71,7 +71,11 @@ function App() {
   }
 
   const saldoText =
-    data && (data.player.saldo > 0 ? `+${data.player.saldo}` : data.player.saldo);
+    data?.player != null
+      ? data.player.saldo > 0
+        ? `+${data.player.saldo}`
+        : data.player.saldo
+      : null;
 
   return (
     <div className="app">
