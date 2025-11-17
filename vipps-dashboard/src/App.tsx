@@ -50,9 +50,20 @@ function App() {
         throw new Error(`HTTP ${res.status}`);
       }
 
-      const json = (await res.json()) as ApiResponse;
-      setData(json);
+      const raw = await res.json();
+      console.log("API response:", raw);
+
+      // Mange no-code/verktøy returnerer eit array – ta første entry i så fall
+      const json = Array.isArray(raw) ? raw[0] : raw;
+
+      if (!json || !json.player) {
+        console.error("Unexpected API shape:", json);
+        throw new Error("API-response manglar 'player'-felt");
+      }
+
+      setData(json as ApiResponse);
     } catch (err: any) {
+      console.error(err);
       setError(err.message ?? "Noko gjekk gale");
     } finally {
       setLoading(false);
